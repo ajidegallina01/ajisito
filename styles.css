@@ -1,22 +1,28 @@
+/* Reset básico y propiedades base */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body {
-    overflow: hidden;
+    overflow-x: hidden; /* evitar scroll horizontal */
     font-family: 'Arial', sans-serif;
-    color: white;
+    color: #6b7280; /* gris neutro */
+    background-color: #ffffff; /* fondo blanco */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
+/* Fondo y efectos */
 #night-sky {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, #0b0d32 0%, #1a1e3c 50%, #212744 100%);
+    background: linear-gradient(to bottom, #f9fafb 0%, #f3f4f6 50%, #e5e7eb 100%);
     z-index: -3;
 }
 
@@ -33,70 +39,82 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(ellipse at center, rgba(100, 100, 160, 0) 0%, rgba(100, 100, 160, 0) 40%, rgba(128, 100, 200, 0.1) 60%, rgba(180, 120, 220, 0.15) 100%);
+    background: radial-gradient(ellipse at center,
+      rgba(160, 160, 160, 0) 0%,
+      rgba(160, 160, 160, 0) 40%,
+      rgba(128, 128, 128, 0.1) 60%,
+      rgba(180, 180, 180, 0.15) 100%);
     z-index: -1;
-    opacity: 0.6;
+    opacity: 0.1; /* tenue para no saturar */
 }
 
 .moon {
     position: absolute;
     top: 11%;
     left: 50%;
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     background: transparent;
-    box-shadow: -10px -15px 0 0 #fffad6;
+    box-shadow: -6px -9px 0 0 #f3f4f6;
     z-index: 1;
     transform-origin: center;
     transform: translate(-20%, -50%) rotate(-60deg);
 }
 
-
-
+/* Contenedor del reproductor */
 .player-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 85%;
+    position: relative;
+    margin: 3rem auto;
+    width: 95%;
     max-width: 400px;
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 15px;
-    padding: 20px;
+    background-color: #fff;
+    border-radius: 0.75rem;
+    padding: 2rem;
     text-align: center;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow:
+      0 2px 4px rgb(0 0 0 / 0.05),
+      0 8px 16px rgb(0 0 0 / 0.1);
+    color: #374151;
+    font-weight: 500;
     z-index: 10;
+    user-select: none;
 }
 
 .player-header {
-    margin-bottom: 15px;
-    font-size: 0.8em;
-    color: #aaa;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #9ca3af;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-weight: 600;
+    gap: 0.5rem;
 }
 
 .player-header .icon {
-    margin-right: 5px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #111827;
 }
 
 .album-art {
-    width: 200px;
-    height: 200px;
-    margin: 0 auto 20px;
-    border-radius: 10px;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 1.5rem;
+    border-radius: 0.75rem;
     overflow: hidden;
     position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 10px 15px rgb(0 0 0 / 0.1);
+    background: linear-gradient(135deg, #e5e7eb, #d1d5db);
 }
 
 .album-art img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    pointer-events: none;
+    user-select: none;
 }
 
 .album-shadow {
@@ -105,79 +123,90 @@ body {
     left: 0;
     width: 100%;
     height: 50%;
-    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%);
+    background: linear-gradient(to bottom, rgba(255 255 255 / 0) 0%, rgba(255 255 255 / 0.6) 100%);
+    pointer-events: none;
+    border-radius: 0 0 0.75rem 0.75rem;
 }
 
 .song-info {
-    margin-bottom: 25px;
+    margin-bottom: 2rem;
 }
 
 .song-title {
-    font-size: 1.4em;
-    font-weight: bold;
-    margin-bottom: 5px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    color: #111827;
 }
 
 .artist-name {
-    font-size: 1em;
-    color: #aaa;
+    font-size: 1rem;
+    color: #6b7280;
 }
 
 .progress-container {
     width: 100%;
-    height: 4px;
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 2px;
-    margin-bottom: 10px;
+    height: 6px;
+    background-color: #e5e7eb;
+    border-radius: 0.375rem;
+    margin-bottom: 1rem;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .progress-bar {
     height: 100%;
     width: 35%;
-    background-color: white;
-    border-radius: 2px;
+    background-color: #2563eb;
+    border-radius: 0.375rem;
+    transition: width 0.2s ease;
 }
 
 .time-info {
     display: flex;
     justify-content: space-between;
-    font-size: 0.8em;
-    color: #aaa;
-    margin-bottom: 20px;
+    font-size: 0.875rem;
+    color: #9ca3af;
+    margin-bottom: 2rem;
 }
 
 .controls {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 25px;
+    gap: 2rem;
 }
 
 .control-btn {
     background: none;
     border: none;
-    color: white;
+    color: #6b7280;
     cursor: pointer;
-    font-size: 1.2em;
-    opacity: 0.8;
+    font-size: 1.5rem;
+    opacity: 0.7;
     transition: opacity 0.2s;
+    user-select: none;
 }
 
-.control-btn:hover {
+.control-btn:hover,
+.control-btn:focus-visible {
     opacity: 1;
+    outline: none;
+    color: #2563eb;
 }
 
 .play-btn {
-    width: 50px;
-    height: 50px;
-    background-color: white;
+    width: 56px;
+    height: 56px;
+    background-color: #2563eb;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: black;
-    font-size: 1.5em;
+    color: white;
+    font-size: 1.8rem;
+    font-weight: 700;
+    border: none;
 }
 
 .simpson-silhouette {
@@ -185,12 +214,13 @@ body {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 600px;
-    height: 600px;
+    width: 300px;
+    height: 300px;
     z-index: 5;
-    opacity: 0.8;
+    opacity: 0.6;
 }
 
+/* Animación disparos (estrellas fugaces) */
 .shooting-star {
     position: absolute;
     width: 2px;
@@ -198,4 +228,43 @@ body {
     background-color: white;
     border-radius: 50%;
     opacity: 0;
+}
+
+/* Media Queries para móvil */
+@media (max-width: 768px) {
+    .player-container {
+        padding: 1.5rem;
+        max-width: none;
+    }
+    .album-art {
+        width: 120px;
+        height: 120px;
+    }
+    .song-title {
+        font-size: 1.3rem;
+    }
+    .artist-name {
+        font-size: 0.9rem;
+    }
+    .controls {
+        gap: 1rem;
+    }
+    .control-btn {
+        font-size: 1.2rem;
+    }
+    .play-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 1.5rem;
+    }
+    .simpson-silhouette {
+        width: 200px;
+        height: 200px;
+        opacity: 0.5;
+    }
+    .moon {
+        width: 50px;
+        height: 50px;
+        box-shadow: none;
+    }
 }
