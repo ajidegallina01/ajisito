@@ -654,20 +654,3 @@ window.addEventListener('beforeunload', function() {
         cancelAnimationFrame(animationFrameId);
     }
 });
-function disableAnimationsOnMobile() {
-    if (isMobileDevice()) {
-        console.log("Desactivando animaciones en dispositivos móviles.");
-        // Detén las animaciones de estrellas
-        cancelAnimationFrame(animationFrameId);
-
-        // Opcional: Oculta o simplifica los elementos visuales
-        const starsCanvas = document.getElementById('stars-canvas');
-        if (starsCanvas) {
-            starsCanvas.style.display = 'none'; // Oculta el canvas
-        }
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    disableAnimationsOnMobile();
-});
