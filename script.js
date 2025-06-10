@@ -653,45 +653,4 @@ window.addEventListener('beforeunload', function() {
     if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
     }
-    // Limpiar recursos al cerrar
-window.addEventListener('beforeunload', function() {
-    // Detener el bucle de animación
-    if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
-    }
-});
-
-// Detectar si el usuario está accediendo desde un dispositivo móvil
-function isMobileDevice() {
-    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-}
-
-// Función para bloquear el login en dispositivos móviles
-function blockLoginOnMobile() {
-    if (isMobileDevice()) {
-        console.log("Acceso desde un dispositivo móvil detectado. Login deshabilitado.");
-
-        // Deshabilitar el botón de login si existe
-        const loginButton = document.getElementById('login-button');
-        if (loginButton) {
-            loginButton.disabled = true;
-            loginButton.style.backgroundColor = 'gray';
-            loginButton.innerText = 'Login deshabilitado en móvil';
-        }
-
-        // Mostrar mensaje al usuario si intenta acceder
-        const loginForm = document.getElementById('login-form');
-        if (loginForm) {
-            loginForm.addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevenir el envío del formulario
-                alert('El login está deshabilitado desde dispositivos móviles.');
-            });
-        }
-    }
-}
-
-// Llamar a la función para bloquear el login en móviles al cargar el DOM
-document.addEventListener('DOMContentLoaded', function() {
-    blockLoginOnMobile();
-});
 });
